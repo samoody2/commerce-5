@@ -72,8 +72,10 @@ def listing(request):
 def watchlist(request):
     return render(request, "auctions/index.html")
 
+@login_required
 def categories(request):
     return render(request, "auctions/index.html")
 
+@login_required
 def new_listing(request):
-    return render(request, "auctions/index.html")
+    return render(request, "auctions/new_listing.html")

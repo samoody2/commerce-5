@@ -34,7 +34,7 @@ class Listing(models.Model):
     
     #returning the title, category and seller
     def __str__(self):
-        return f"(self.title, self.category, self.seller)"
+        return f"{self.title, self.category, self.seller}"
 
 #model will handle the bid submission, using foreignkeys to allow multiple listings and users to pass through
 class Bid(models.Model):

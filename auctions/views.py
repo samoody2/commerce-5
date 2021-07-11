@@ -1,8 +1,9 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout 
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import User, Listing, Category
 
@@ -62,8 +63,17 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+
+def listing(request):
+    
+    return render(request, "auctions/index.html")
+
+@login_required
 def watchlist(request):
     return render(request, "auctions/index.html")
 
 def categories(request):
+    return render(request, "auctions/index.html")
+
+def new_listing(request):
     return render(request, "auctions/index.html")

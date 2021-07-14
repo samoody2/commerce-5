@@ -12,7 +12,7 @@ class User(AbstractUser):
 class Category(models.Model):
     category = models.CharField(max_length=15)
     def __str__(self):
-        return f"(self.category)"
+        return self.category
 
 # class for our listings, the "heart" of the website. using many to one relationships so that sellers can have multiple listings and there can be multiple watchers
 class Listing(models.Model):
@@ -25,7 +25,7 @@ class Listing(models.Model):
     starting_bid = models.FloatField(blank=True, null=True)
     current_bid = models.FloatField(blank=True, null=True)
     #settings.py has a MEDIA_URL path that will allow images to be stored there. similar to the STATIC_URL included
-    image = models.ImageField(upload_to ='uploads/')
+    image = models.ImageField(upload_to ='')
     #boolean used to make sure only active listings are displayed
     active = models.BooleanField(default= True)
     start_date= models.DateField(auto_now_add=True)
@@ -34,14 +34,17 @@ class Listing(models.Model):
     
     #returning the title, category and seller
     def __str__(self):
-        return f"{self.title, self.category, self.seller}"
+        
+        return '{} {} {} {}'.format(self.image, self.title, self.seller, self.category)
 
 #model will handle the bid submission, using foreignkeys to allow multiple listings and users to pass through
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     bidder = models.ForeignKey(User, on_delete=models.CASCADE)
-    bid_amount = models.FloatField
+    bid_amount = models.FloatField(default='')
 
+    def __str__(self):
+        return self.listing, self.bidder
 
 
 '''

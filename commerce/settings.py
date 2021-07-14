@@ -121,4 +121,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#using MEDIA_URL instead of STATIC_URL as a stylistic choice 
 MEDIA_URL = '/uploads/'

@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Category, Listing, Bid
+from auctions.models import Category, Listing, Bid
 
 class CategoryForm(ModelForm):
     class Meta:
@@ -9,9 +9,9 @@ class CategoryForm(ModelForm):
 class ListingForm(ModelForm):
     class Meta:
         model = Listing
-        fields = ["title", "description", "category", "starting_bid", "image" ]
+        fields = ["title", "description", "category", "starting_bid", "image"]
 
 class BidForm(ModelForm):
     class Meta:
         model = Bid
-        fields = []
+        fields = ["bid_amount"]

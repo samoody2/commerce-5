@@ -1,0 +1,13 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>{{listing.title}}</h1>
+<br>
+<img class="card-img-top" src="{{ listing.image}}">
+<br>
+<p class="card-body">Description: {{ listing.description }}</p>
+<p class="card-body">Starting Bid: {{ listing.starting_bid }}</p>
+<p class="card-body">Current Bid {{ listing.current_bid }}</p>
+
+<btn>Bid Now</btn>
+{% endblock %}

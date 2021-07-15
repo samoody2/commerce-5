@@ -3,11 +3,45 @@
 {% block body %}
 <h1>{{listing.title}}</h1>
 <br>
-<img class="card-img-top" src="{{ listing.image}}">
+<img  src="{{ listing.image.url }}" height="150">
 <br>
-<p class="card-body">Description: {{ listing.description }}</p>
-<p class="card-body">Starting Bid: {{ listing.starting_bid }}</p>
-<p class="card-body">Current Bid {{ listing.current_bid }}</p>
+<p>Description: {{ listing.description }}</p>
+<p>Category: {{ listing.category }}</p>
+<p>Starting Bid: {{ listing.starting_bid }}</p>
+<p>Current Bid: {{ listing.current_bid }}</p>
+<p>Sold By: {{ listing.seller }}</p>
+<br>
+{% comment %}
+<h5>Place Bid</h5>
+{% if error_min_value %}
+<p>
+    {% if listing.current_bid %}
+        <div class="alert" role="alert">Your bid must be bigger than {{ listing.current_bid|default:listing.starting_bid }}</div>
+    {% else %}
+        <div class="alert" role="alert">Your bid must be equal or bigger than {{ listing.current_bid|default:listing.starting_bid }}</div>
+    {% endif %}
+</p>
+{% endif %}
 
-<btn>Bid Now</btn>
+      <form action="{% url 'new_bid' %}" method="post">
+        {% csrf_token %}
+        {{ bid_form }}
+        <input class="btn btn-primary" type="submit" value="Bid Now">
+    </form>
+{% endcomment %}
+<br><br>
+ <h5>Comments</h5>
+    {% for comment in comments %}
+     <ul>
+         <li>{{comment}}</li>
+    </ul>
+    {% endfor %}
+<br><br>
+Add Comment
+    <form action="{% url 'categories' %}" method="post">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input class="btn btn-primary" type="submit" value="Post Comment">
+  </form>
+
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ category }}</h2>
+    
+{% for category in categories %}
+    {% if listing.category == category %}
+    <h1>{{listing.title}}</h1>
+    <br>
+    <a href="{% url 'listing' product.id %}"><img  src="{{ listing.image.url }}" height="150"></a>
+    <br>
+    <p>Description: {{ listing.description }}</p>
+    <p>Category: {{ listing.category }}</p>
+    <p>Starting Bid: {{ listing.starting_bid }}</p>
+    <p>Current Bid: {{ listing.current_bid }}</p>
+    <br>
+    {% endif %}
+      {% endfor %}
+
+
+
+{% endblock %}

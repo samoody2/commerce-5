@@ -83,9 +83,18 @@ class Bid(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_comment = models.CharField(max_length=250)
+    user_comment = models.TextField(max_length=250)
     listing = models.ForeignKey(
         Listing,
         on_delete=models.CASCADE,
         related_name="all_comments")
     comment_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'On {self.comment_time} {self.user} said "{self.user_comment}"'
+
+class Watchlist(models.Model):
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
+   watchlist_item = models.ManyToManyField(Listing)
+   def __str__(self):
+       return f"{self.user}'s WatchList"
